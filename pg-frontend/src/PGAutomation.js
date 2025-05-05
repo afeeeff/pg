@@ -23,7 +23,7 @@ export default function PGAutomation() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [showLanding, setShowLanding] = useState(true);
-  const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+  const stripePromise = loadStripe('pk_test_51RI4JE2RYxgGiQ1OHkrWl5Nm7W6brFecxKWvEF8VzWxw2dAVUcWdc4YM73KtGqw4VQ8Go7kYBNt9tq4ge5QpZGCc00r9pavBhe');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   // Updated shouldShowNav function to include login and register pages but exclude room, payment, and invoice
