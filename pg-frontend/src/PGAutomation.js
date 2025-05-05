@@ -10,6 +10,8 @@ import StripeLoaderTest from './components/StripeLoaderTest';
 import HeroSection from './components/HeroSection';
 import Payment from './components/Payment';
 import NavBar from './components/NavBar';
+const API_BASE_URL = "https://pgbackend-p3p0.onrender.com" ;
+
 
 export default function PGAutomation() {
   const [formData, setFormData] = useState({ name: '', email: '', password: '', aadhar: '', mobile: '', address: '', roomType: '', days: '' });
@@ -21,7 +23,7 @@ export default function PGAutomation() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [showLanding, setShowLanding] = useState(true);
-  const stripePromise = loadStripe('pk_test_51RI4JE2RYxgGiQ1OHkrWl5Nm7W6brFecxKWvEF8VzWxw2dAVUcWdc4YM73KtGqw4VQ8Go7kYBNt9tq4ge5QpZGCc00r9pavBhe');
+  const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   // Updated shouldShowNav function to include login and register pages but exclude room, payment, and invoice
@@ -58,7 +60,7 @@ export default function PGAutomation() {
 
   useEffect(() => {
     if (isOwner) {
-      axios.get('http://localhost:5000/api/owner/dashboard')
+      axios.get(`${API_BASE_URL}/api/owner/dashboard`)
         .then(res => setPayments(res.data))
         .catch(err => console.error(err));
     }
@@ -78,7 +80,7 @@ export default function PGAutomation() {
 
   const handleRegister = async () => {
     try {
-      await axios.post('http://localhost:5000/api/users/register', {
+      await axios.post(`${API_BASE_URL}/api/users/register`, {
         name: formData.name,
         email: formData.email,
         password: formData.password,
@@ -96,7 +98,7 @@ export default function PGAutomation() {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post('http://localhost:5000/api/users/login', {
+      const res = await axios.post(`${API_BASE_URL}/api/users/login`, {
         email: formData.email,
         password: formData.password,
       });
@@ -122,7 +124,7 @@ export default function PGAutomation() {
     if (!uid) return alert("UID missing");
 
     try {
-      await axios.post('http://localhost:5000/api/payments', {
+      await axios.post(`${API_BASE_URL}/api/payments`, {
         uid,
         amount: cost,
         paid: true,
@@ -184,7 +186,7 @@ export default function PGAutomation() {
   const handlePaymentSuccess = async (paymentResult) => {
     try {
       const response = await axios.post(
-        'http://localhost:5000/payment/confirm',
+        `${API_BASE_URL}/payment/confirm`,
         {
           paymentId: paymentResult.paymentIntent.id,
           uid: formData.email,
