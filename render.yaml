@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: pg-automation
+    env: node
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: MONGO_URI
+        value: your_mongodb_uri
+      - key: STRIPE_SECRET_KEY
+        value: your_stripe_key

@@ -1,0 +1,496 @@
+
+body {
+  background: #f8fafc;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #1e293b;
+}
+
+.container {
+  max-width: 960px;
+  margin: auto;
+  padding: 2.5rem 1rem;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+input, select {
+  display: block;
+  width: 100%;
+  margin-top: 0.8rem;
+  margin-bottom: 1.4rem;
+  padding: 1rem;
+  border-radius: 14px;
+  border: 1px solid #cbd5e1;
+  font-size: 1rem;
+  background-color: #ffffff;
+  color: #1e293b;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus, select:focus {
+  border-color: #6366f1;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+
+button {
+  background-color: #6366f1;
+  color: white;
+  padding: 0.95rem 2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #4f46e5;
+  transform: translateY(-2px);
+}
+
+.pay-btn {
+  background-color: #22c55e;
+}
+
+.pay-btn:hover {
+  background-color: #16a34a;
+}
+
+
+.uid {
+  color: #16a34a;
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.payment-item {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 18px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 1.8rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+}
+
+.paid {
+  color: #16a34a;
+  font-weight: bold;
+}
+
+.pending {
+  color: #ef4444;
+  font-weight: bold;
+}
+
+
+.room-options {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.room-card {
+  border: 2px solid transparent;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 18px;
+  text-align: center;
+  width: 160px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  color: #1e293b;
+}
+
+.room-card:hover {
+  transform: scale(1.05);
+  background-color: #e0f2fe;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.room-card.selected {
+  border-color: #3b82f6;
+  background-color: #bfdbfe;
+  box-shadow: 0 0 14px rgba(59, 130, 246, 0.3);
+}
+
+
+.room-img {
+  width: 100px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+
+.top-bar {
+  width: 100%;
+  background-color: #f0f4ff;
+  color: #1e293b;
+  padding: 1rem 0;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 0 0 12px 12px;
+  margin-bottom: 2rem;
+}
+
+
+.branding {
+  font-size: 28px;
+  font-weight: bold;
+  color: #1e293b;
+}
+
+.user-icon-container-right {
+  position: relative;
+}
+
+.user-icon-large {
+  font-size: 28px;
+  cursor: pointer;
+  color: #ef4444;
+}
+
+.user-dropdown {
+  position: absolute;
+  right: 0;
+  top: 40px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 12px;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  color: #1e293b;
+}
+
+.dashboard-table-container {
+  overflow-x: auto;
+}
+
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+  background: white;
+}
+
+.dashboard-table th,
+.dashboard-table td {
+  padding: 1.2rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+  color: #1e293b;
+}
+
+dashboard-table th {
+  background-color: #f3f4f6;
+  font-weight: 600;
+}
+
+dashboard-table tr:hover {
+  background-color: #f9fafb;
+}
+
+.paid-status {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+.pending-status {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+.highlights-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 20px auto;
+}
+
+.highlight-badge {
+  background-color: #22c55e;
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  animation: glow 1.5s infinite alternate;
+  transition: transform 0.2s ease;
+  cursor: default;
+}
+
+.highlight-badge:hover {
+  transform: scale(1.05);
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px #22c55e;
+  }
+  to {
+    box-shadow: 0 0 20px #86efac;
+  }
+}
+
+.feature-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+  margin: 40px auto;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+
+.feature-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  padding: 24px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  color: #1e293b;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+}
+
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+.feature-card h3 {
+  font-size: 1.25rem;
+  margin: 10px 0;
+  color: #1f2937;
+}
+
+.feature-card p {
+  font-size: 0.95rem;
+  color: #4b5563;
+}
+
+form.login-form,
+form.register-form {
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  max-width: 100%;
+}
+
+form.login-form input,
+form.register-form input {
+  margin-bottom: 1rem;
+}
+
+.auth-section {
+  margin-top: 80px;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f8fafc;
+  height: 100%;
+  width: 100%;
+}
+
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+/* Add these styles to your App.css file */
+
+.auth-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.back-to-home {
+  padding: 8px 12px;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #333;
+  transition: background-color 0.3s;
+}
+
+.back-to-home:hover {
+  background-color: #e0e0e0;
+}
+
+/* Ensure the auth box has proper padding */
+.auth-box {
+  padding: 30px;
+}
+
+/* Make sure the owner panel doesn't collide with the login box */
+.owner-panel {
+  margin-top: 20px;
+}
+/* Payment Component Styles */
+.payment-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.payment-details {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 5px;
+}
+
+.payment-form {
+  margin-top: 20px;
+}
+
+.card-element-container {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+
+.test-card-details {
+  margin: 20px 0;
+  padding: 15px;
+  background: #f0f8ff;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.test-card-details h4 {
+  margin-top: 0;
+  color: #2c3e50;
+}
+
+.payment-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.payment-actions button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.payment-actions button:first-child {
+  background: #e0e0e0;
+}
+
+.payment-actions button:last-child {
+  background: #4CAF50;
+  color: white;
+}
+
+.payment-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #e74c3c;
+  margin: 10px 0;
+}
+/* Amenities Section Styles */
+.info-section {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.info-section h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: #2c3e50;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+.feature-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 25px;
+  width: 100%;
+  max-width: 350px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-size: 1.1rem;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1000px) {
+  .feature-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+
+
+
+
