@@ -1,3 +1,9 @@
+# PG Automation App
+
+A full-stack app for managing PG bookings, invoices, and dashboards.
+
+### 🌐 Live Website: [Click here to visit](https://quickstay-kpfh.onrender.com/)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
