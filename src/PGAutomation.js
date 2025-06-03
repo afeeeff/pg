@@ -10,7 +10,7 @@ import StripeLoaderTest from './components/StripeLoaderTest';
 import HeroSection from './components/HeroSection';
 import Payment from './components/Payment';
 import NavBar from './components/NavBar';
-const API_BASE_URL = process.env.REACT_APP_API_URL || "https://pgbackend-p3p0.onrender.com" ||'http://localhost:5000';
+const API_BASE_URL = "https://pgbackend-p3p0.onrender.com" ;
 
 
 export default function PGAutomation() {

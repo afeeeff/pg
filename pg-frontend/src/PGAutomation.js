@@ -10,7 +10,7 @@ import StripeLoaderTest from './components/StripeLoaderTest';
 import HeroSection from './components/HeroSection';
 import Payment from './components/Payment';
 import NavBar from './components/NavBar';
-const API_BASE_URL = "https://pgbackend-p3p0.onrender.com" ;
+const API_BASE_URL = "http://localhost:5000" ;
 
 
 export default function PGAutomation() {

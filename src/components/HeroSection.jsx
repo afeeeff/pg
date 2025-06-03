@@ -6,7 +6,7 @@ const HeroSection = ({ handleRegisterClick }) => {
     <section className="hero-container">
       <div className="hero-overlay"></div>
       <div className="hero-content">
-        <h1 className="hero-title">Find Your Perfect PG Stay- Only at</h1>
+        <h1 className="hero-title">ind Your Perfect PG Stay- Only at</h1>
         <h1 className="hero-title">Quick Stay</h1>
         <p className="hero-description">
           Book, Pay, Track Bills & Manage Everything in One Place.

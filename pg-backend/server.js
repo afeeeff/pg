@@ -17,11 +17,9 @@ app.use('/payment', paymentRoutess);
 
 // Middleware
 app.use(cors({
-  origin: [
-    
-    'https://quickstay-kpfh.onrender.com'
-  ],
-  credentials: true
+  origin: 'http://localhost:5001', // allow frontend origin
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true // only if you're using cookies or sessions
 }));
 app.use(express.json());
 
