@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
+
 const mongoose = require('mongoose');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
@@ -16,11 +16,25 @@ app.use('/payment', paymentRoutess);
 
 
 // Middleware
+const cors = require('cors');
+
+const allowedOrigins = [
+  'http://localhost:5001',                      // Local frontend
+  'https://quickstay-kpfh.onrender.com'         // Hosted frontend
+];
+
 app.use(cors({
-  origin: 'http://localhost:5001', // allow frontend origin
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true // only if you're using cookies or sessions
+  credentials: true
 }));
+
 app.use(express.json());
 
 // Database Connection
