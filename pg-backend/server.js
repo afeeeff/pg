@@ -1,20 +1,9 @@
 require('dotenv').config();
 const express = require('express');
+const app = express();
 
 const mongoose = require('mongoose');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-
-// Import routes
-const userRoutes = require('./routes/users');
-const paymentRoutes = require('./routes/payments');
-const ownerRoutes = require('./routes/owner');
-const paymentRoutess = require('./routes/payment');
-
-
-const app = express();
-app.use('/payment', paymentRoutess);
-
-
 // Middleware
 const cors = require('cors');
 
@@ -34,8 +23,25 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
-
 app.use(express.json());
+
+
+// Import routes
+const userRoutes = require('./routes/users');
+const paymentRoutes = require('./routes/payments');
+const ownerRoutes = require('./routes/owner');
+//const paymentRoutess = require('./routes/payment');
+const manualPaymentRoutes = require('./routes/payment')
+
+
+
+app.use('/api/payment', manualPaymentRoutes);
+//app.use('/payment', paymentRoutess);
+
+
+
+
+app.use('/uploads', express.static('uploads'));
 
 // Database Connection
 mongoose.connect(process.env.MONGO_URI)
@@ -71,6 +77,7 @@ app.post('/api/create-payment-intent', async (req, res) => {
 
 // Use your existing routes
 app.use('/api/users', userRoutes);
+//app.use('/api/payments', paymentRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/owner', ownerRoutes);
 

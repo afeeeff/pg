@@ -37,4 +37,14 @@ router.get('/dashboard', async (req, res) => {
   });
   
 
+// Get all manual payments for owner dashboard
+router.get('/manual-payments', async (req, res) => {
+  try {
+    const payments = await Payment.find().sort({ createdAt: -1 });
+    res.json({ success: true, payments });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
 module.exports = router;
