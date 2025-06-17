@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './ManualPayment.css'; // Make sure this is imported
 
 const ManualPayment = ({ formData, cost, userId, onSuccess, onBack, isLoggedIn, uid }) => {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
@@ -14,7 +15,6 @@ const ManualPayment = ({ formData, cost, userId, onSuccess, onBack, isLoggedIn, 
     ? 'http://localhost:5000'
     : 'https://pgbackend-p3p0.onrender.com';
 
-  // Recipient details (replace with your actual details)
   const recipientDetails = {
     phoneNumber: '+91 6363722888',
     upiId: 'quickstay@paytm',
@@ -27,26 +27,22 @@ const ManualPayment = ({ formData, cost, userId, onSuccess, onBack, isLoggedIn, 
     { value: 'paytm', label: 'Paytm' }
   ];
 
-  // Generate QR code on component mount
   useEffect(() => {
     const generateQR = async () => {
       try {
-        // Generate UPI payment link
         const upiLink = `upi://pay?pa=${recipientDetails.upiId}&pn=${encodeURIComponent(recipientDetails.name)}&am=${cost}&tn=PG Payment for ${formData.roomType}`;
-        
-        // Use a free QR code generator API
         const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiLink)}`;
-        
         setQrCodeUrl(qrCodeUrl);
       } catch (error) {
         console.error('Error generating QR code:', error);
       }
     };
 
-    generateQR();
-  }, [cost, formData.roomType]);
+    if (cost > 0 && formData.roomType) { // Generate QR only if cost and roomType are available
+        generateQR();
+    }
+  }, [cost, formData.roomType, recipientDetails.upiId, recipientDetails.name]);
 
-  // Fetch user payments if logged in
   useEffect(() => {
     if (isLoggedIn && uid) {
       setLoadingPayments(true);
@@ -55,36 +51,36 @@ const ManualPayment = ({ formData, cost, userId, onSuccess, onBack, isLoggedIn, 
         .then(res => setUserPayments(res.data.payments || []))
         .finally(() => setLoadingPayments(false));
     }
-  }, [isLoggedIn, uid]);
+  }, [isLoggedIn, uid, API_BASE_URL]); // Added API_BASE_URL to dependency array
 
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
-      // Validate file type
       const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
       if (!allowedTypes.includes(file.type)) {
         alert('Please upload only image files (JPEG, PNG, GIF)');
+        setUploadedFile(null); // Clear selection
         return;
       }
-      
-      // Validate file size (max 5MB)
+
       if (file.size > 5 * 1024 * 1024) {
         alert('File size should be less than 5MB');
+        setUploadedFile(null); // Clear selection
         return;
       }
-      
+
       setUploadedFile(file);
     }
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
+
     if (!selectedPaymentMethod) {
       alert('Please select a payment method');
       return;
     }
-    
+
     if (!uploadedFile) {
       alert('Please upload payment receipt');
       return;
@@ -104,7 +100,7 @@ const ManualPayment = ({ formData, cost, userId, onSuccess, onBack, isLoggedIn, 
       formDataToSend.append('userName', formData.name);
       formDataToSend.append('userEmail', formData.email);
       formDataToSend.append('userPhone', formData.mobile);
-      
+
       const response = await axios.post(`${API_BASE_URL}/api/payment/manual-payment`, formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -121,21 +117,20 @@ const ManualPayment = ({ formData, cost, userId, onSuccess, onBack, isLoggedIn, 
         throw new Error('Failed to submit payment details');
       }
     } catch (error) {
-console.error('Error submitting payment:', error);
-if (error.response) {
-  console.error('Backend response:', error.response.data);
-}
-setSubmitStatus('error');
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+      console.error('Error submitting payment:', error);
+      if (error.response) {
+        console.error('Backend response:', error.response.data);
+      }
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="form-box slide-in">
       <h2>Complete Your Payment</h2>
-      
-      {/* Payment Summary */}
+
       <div className="payment-summary">
         <h3>Payment Summary</h3>
         <p><strong>Room Type:</strong> {formData.roomType}</p>
@@ -144,7 +139,6 @@ setSubmitStatus('error');
       </div>
 
       <div className="payment-container">
-        {/* QR Code Section */}
         <div className="qr-section">
           <h3>📱 Scan QR Code to Pay</h3>
           <div className="qr-code-container">
@@ -156,7 +150,6 @@ setSubmitStatus('error');
           </div>
         </div>
 
-        {/* Payment Details */}
         <div className="payment-details">
           <div className="detail-card">
             <h4>📞 Phone Number</h4>
@@ -169,12 +162,11 @@ setSubmitStatus('error');
           </div>
         </div>
 
-        {/* Payment Form */}
         <form onSubmit={handleSubmit} className="payment-form">
-          {/* Payment Method Selection */}
           <div className="form-group">
-            <label>Select Payment Method</label>
+            <label htmlFor="payment-method-select">Select Payment Method</label>
             <select
+              id="payment-method-select"
               value={selectedPaymentMethod}
               onChange={(e) => setSelectedPaymentMethod(e.target.value)}
               required
@@ -188,7 +180,6 @@ setSubmitStatus('error');
             </select>
           </div>
 
-          {/* File Upload */}
           <div className="form-group">
             <label>Upload Payment Receipt/Screenshot</label>
             <div className="file-upload-area">
@@ -207,7 +198,6 @@ setSubmitStatus('error');
             </div>
           </div>
 
-          {/* Action Buttons */}
           <div className="form-actions">
             <button type="button" onClick={onBack} className="back-btn">
               ← Back to Room Selection
@@ -222,23 +212,19 @@ setSubmitStatus('error');
           </div>
         </form>
 
-        {/* Status Messages */}
         {submitStatus === 'success' && (
           <div className="success-message">
             ✅ Payment details submitted successfully! We will verify your payment shortly.
-            
           </div>
         )}
-        
+
         {submitStatus === 'error' && (
           <div className="error-message">
-            ✅ Payment details submitted successfully! We will verify your payment shortly.
-            
+            ❌ Failed to submit payment details. Please try again or contact support.
           </div>
         )}
       </div>
 
-      {/* Instructions */}
       <div className="payment-instructions">
         <h4>Payment Instructions:</h4>
         <ol>

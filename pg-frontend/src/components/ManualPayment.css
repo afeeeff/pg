@@ -1,0 +1,223 @@
+/* ManualPayment.css (Create this new file) */
+
+.payment-summary {
+  background-color: var(--background-dark);
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.payment-summary h3 {
+  color: var(--primary-color);
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.payment-summary p {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.payment-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  justify-content: center;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+.qr-section, .payment-details, .payment-form {
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  flex: 1; /* Distribute space evenly */
+  min-width: 320px; /* Minimum width for each section */
+}
+
+.qr-section h3, .payment-details h4 {
+  color: var(--primary-color);
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.qr-code-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 220px; /* Ensure space for QR code */
+  background-color: #f0f2f5;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.qr-code {
+  width: 200px;
+  height: 200px;
+  border: 5px solid white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.qr-placeholder {
+  color: #777;
+  font-style: italic;
+}
+
+.detail-card {
+  background-color: var(--background-light);
+  border: 1px dashed var(--border-color);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.detail-card h4 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+.detail-value {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.payment-form .form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.payment-form label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.file-upload-area {
+  border: 2px dashed var(--border-color);
+  border-radius: 10px;
+  padding: 30px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  background-color: var(--background-light);
+}
+
+.file-upload-area:hover {
+  border-color: var(--primary-color);
+  background-color: #f0f5fa;
+}
+
+.file-input {
+  display: none; /* Hide default input */
+}
+
+.file-upload-label {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.file-info {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.back-btn {
+  background-color: #6c757d;
+}
+
+.back-btn:hover {
+  background-color: #5a6268;
+}
+
+.submit-btn {
+  background-color: var(--primary-color);
+}
+
+.success-message {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1.1rem;
+  border: 1px solid #c3e6cb;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1.1rem;
+  border: 1px solid #f5c6cb;
+}
+
+.payment-instructions {
+  background-color: var(--background-light);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  margin-top: 40px;
+}
+
+.payment-instructions h4 {
+  font-size: 1.6rem;
+  color: var(--text-color-dark);
+  margin-bottom: 20px;
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
+}
+
+.payment-instructions ol {
+  list-style: none;
+  counter-reset: step-counter;
+  padding-left: 0;
+}
+
+.payment-instructions ol li {
+  counter-increment: step-counter;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  position: relative;
+  padding-left: 35px;
+  color: #555;
+}
+
+.payment-instructions ol li::before {
+  content: counter(step-counter);
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: var(--primary-color);
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+}

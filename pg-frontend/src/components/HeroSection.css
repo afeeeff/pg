@@ -1,82 +1,73 @@
-/* src/components/HeroSection.css */
-
+/* HeroSection.css */
 
 .hero-container {
-    position: relative;
-    height: 80vh;
-    background-image: url('/photo.jpeg'); /* Update with your background image path */
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
+  position: relative;
+  width: 100%;
+  height: 600px; /* Increased height for impact */
+  background: url('./hero-bg.jpg') no-repeat center center/cover; /* Add a professional background image */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white; /* Text color for contrast */
+  overflow: hidden;
+  margin-top: -80px; /* Pull it up to sit behind the sticky nav */
+  padding-top: 80px; /* Push content down to avoid nav overlap */
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Darker overlay for text readability */
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  padding: 20px;
+  animation: fadeInScale 1s ease-out forwards;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
   }
-  
-  .hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
-    z-index: 1;
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
-  
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 800px;
-    padding: 0 20px;
-  }
-  
-  .hero-title {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-  }
-  
-  .hero-description {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-  }
-  
-  .hero-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-  }
-  
-  .btn {
-    display: inline-block;
-    padding: 12px 24px;
-    font-size: 1rem;
-    font-weight: 600;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: none;
-  }
-  
-  .btn-primary {
-    background-color: #3498db;
-    color: white;
-  }
-  
-  .btn-primary:hover {
-    background-color: #2980b9;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .hero-title {
-      font-size: 2rem;
-    }
-    
-    .hero-description {
-      font-size: 1rem;
-    }
-  }
+}
+
+.hero-title {
+  font-size: 3.8rem; /* Larger, more impactful title */
+  font-weight: 700;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.hero-description {
+  font-size: 1.4rem; /* Clearer description */
+  margin-bottom: 40px;
+  font-weight: 300;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-buttons .btn-primary {
+  padding: 15px 35px; /* Larger button */
+  font-size: 1.2rem;
+  background-color: var(--secondary-color); /* Use secondary color for CTA */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.hero-buttons .btn-primary:hover {
+  background-color: #43c1a8;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}

@@ -1,72 +1,96 @@
+/* NavBar.css */
+
 .navbar {
-    background-color:white;
-    padding: 1rem 0;
-    box-shadow: 0 2px 4px rgba(159, 10, 10, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-  }
-  
-  .navbar-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-  }
-  
-  .navbar-logo {
-    display: flex;
-    align-items: center;
-    margin: 0;
-    cursor: pointer;
-  }
-  
-  .navbar-logo-img {
-    height: 40px; /* Adjust the height as needed */
-    width: auto;
-    object-fit: contain;
-  }
-  
+  width: 100%;
+  background-color: #ffffff; /* White background for a clean look */
+  padding: 15px 0;
+  box-shadow: 0 2px 15px var(--shadow-light); /* Subtle shadow */
+  position: sticky; /* Makes the navbar stick to the top */
+  top: 0;
+  z-index: 1000; /* Ensure it stays on top of other content */
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px; /* Max width for content */
+  margin: 0 auto;
+  padding: 0 25px;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.navbar-logo-img {
+  height: 50px; /* Adjust size as needed */
+  border-radius: 50%; /* Make it circular if you want */
+  margin-right: 10px;
+  transition: transform var(--transition-speed) ease;
+}
+
+.navbar-logo-img:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 30px; /* Space out links more */
+}
+
+.navbar-links li a {
+  text-decoration: none;
+  color: var(--text-color-dark);
+  font-weight: 500;
+  font-size: 1.05rem;
+  transition: color var(--transition-speed) ease, transform var(--transition-speed) ease;
+  position: relative; /* For underline effect */
+}
+
+.navbar-links li a:hover {
+  color: var(--primary-color);
+  transform: translateY(-2px); /* Subtle lift */
+}
+
+.navbar-links li a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: var(--primary-color);
+  bottom: -5px;
+  left: 0;
+  transition: width var(--transition-speed) ease;
+}
+
+.navbar-links li a:hover::after {
+  width: 100%;
+}
+
+/* Mobile Menu (existing or new) - ensure it's styled for professionalism */
+/* Add responsive adjustments here if you have a mobile menu toggle */
+@media (max-width: 768px) {
   .navbar-links {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    display: none; /* Hide by default on small screens */
+    flex-direction: column;
+    width: 100%;
+    background-color: #ffffff;
+    position: absolute;
+    top: 80px; /* Below the logo */
+    left: 0;
+    padding: 20px;
+    box-shadow: 0 8px 15px var(--shadow-light);
   }
-  
+
+  .navbar-links.active {
+    display: flex; /* Show when active */
+  }
+
   .navbar-links li {
-    margin-left: 1.5rem;
+    margin: 10px 0;
   }
-  
-  .navbar-links a {
-    color: black;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
-    font-size: 1rem;
-  }
-  
-  .navbar-links a:hover {
-    color:rgb(198, 20, 23);
-  }
-  
-  /* Mobile menu styles */
-  @media (max-width: 768px) {
-    .navbar-container {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    
-    .navbar-links {
-      flex-direction: column;
-      width: 100%;
-      margin-top: 1rem;
-    }
-    
-    .navbar-links li {
-      margin: 0.5rem 0;
-      margin-left: 0;
-    }
-  }
+}
